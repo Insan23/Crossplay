@@ -25,10 +25,10 @@ namespace Crossplay
             => "Crossplay";
 
         public override string Author 
-            => "Armano den Boef (Rozen4334)";
+            => "TBC Developers";
 
         public override string Description 
-            => "Enables crossplay for Terraria mobile <> PC";
+            => "Enables crossplay between mobile and PC clients";
 
         public override Version Version 
             => new(1, 0);
