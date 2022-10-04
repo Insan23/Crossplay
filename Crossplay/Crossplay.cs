@@ -14,7 +14,8 @@ namespace Crossplay
         { 
             269, 
             270, 
-            271 
+            271,
+            272
         };
 
         private readonly int[] _clientVersions = new int[Main.maxPlayers];
@@ -130,6 +131,7 @@ namespace Crossplay
                 269 => "v1.4.4",
                 270 => "v1.4.4.1",
                 271 => "v1.4.4.2",
+                272 => "v1.4.4.3",
                 _ => $"Unknown{version}",
             };
     }
