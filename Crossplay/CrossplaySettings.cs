@@ -17,6 +17,6 @@ namespace Crossplay
         public bool UseFakeVersion { get; set; } = true;
 
         [JsonPropertyName("fake-version")]
-        public int FakeVersion { get; set; } = 271;
+        public int FakeVersion { get; set; } = 274;
     }
 }

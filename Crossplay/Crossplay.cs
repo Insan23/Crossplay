@@ -16,7 +16,8 @@ namespace Crossplay
             270, 
             271,
             272,
-            273
+            273,
+            274
         };
 
         private readonly int[] _clientVersions = new int[Main.maxPlayers];
@@ -49,6 +50,11 @@ namespace Crossplay
             {
                 Configuration<CrossplaySettings>.Load("Crossplay");
                 x.Player.SendSuccessMessage("[Crossplay] Reloaded configuration.");
+
+                if (Configuration<CrossplaySettings>.Settings.UseFakeVersion)
+                    _serverVersion = Configuration<CrossplaySettings>.Settings.FakeVersion;
+                else
+                    _serverVersion = Main.curRelease;
             };
 
             if (Configuration<CrossplaySettings>.Settings.UseFakeVersion)
@@ -83,7 +89,7 @@ namespace Crossplay
                             return;
 
                         _clientVersions[index] = versionNum;
-                        NetMessage.SendData(9, args.Msg.whoAmI, -1, NetworkText.FromLiteral("Fixing Version..."), 1);
+                        NetMessage.SendData(9, args.Msg.whoAmI, -1, NetworkText.FromLiteral("Different version detected. Patching..."), 1);
 
                         byte[] connectRequest = new PacketFactory()
                             .SetType(1)
@@ -134,6 +140,7 @@ namespace Crossplay
                 271 => "v1.4.4.2",
                 272 => "v1.4.4.3",
                 273 => "v1.4.4.4",
+                274 => "v1.4.4.5",
                 _ => $"Unknown{version}",
             };
     }
