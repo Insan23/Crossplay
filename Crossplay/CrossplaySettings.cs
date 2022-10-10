@@ -1,22 +1,34 @@
-﻿using Auxiliary.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using TShockAPI;
+using Newtonsoft.Json;
 
-namespace Crossplay
+namespace Crossplay;
+
+public class CrossplaySettings
 {
-    public class CrossplaySettings : ISettings
+    public bool EnableClassicSupport { get; set; } = true;
+    public bool UseFakeVersion { get; set; } = true;
+    public int FakeVersion { get; set; } = 274;
+
+    public CrossplaySettings()
     {
-        [JsonPropertyName("enable-classic-support")]
-        public bool EnableClassicSupport { get; set; } = true;
+        if (!File.Exists(Path.Combine(TShock.SavePath, "crossplay.json")))
+        {
+            SaveConfig();
+        }
+    }
 
-        [JsonPropertyName("use-fake-version")]
-        public bool UseFakeVersion { get; set; } = true;
+    public void LoadConfig()
+    {
+        var savePath = Path.Combine(TShock.SavePath, "crossplay.json");
+        var config = JsonConvert.DeserializeObject<CrossplaySettings>(File.ReadAllText(savePath));
+        EnableClassicSupport = config.EnableClassicSupport;
+        UseFakeVersion = config.UseFakeVersion;
+        FakeVersion = config.FakeVersion;
+    }
 
-        [JsonPropertyName("fake-version")]
-        public int FakeVersion { get; set; } = 274;
+    public void SaveConfig()
+    {
+        var savePath = Path.Combine(TShock.SavePath, "crossplay.json");
+        File.WriteAllText(savePath, JsonConvert.SerializeObject(this, Formatting.Indented));
     }
 }

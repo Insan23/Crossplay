@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Auxiliary">
-      <HintPath>..\..\Application\ServerPlugins\Auxiliary.dll</HintPath>
-    </Reference>
     <Reference Include="OTAPI">
       <HintPath>..\..\Application\bin\OTAPI.dll</HintPath>
     </Reference>
@@ -19,6 +16,10 @@
     <Reference Include="TShockAPI">
       <HintPath>..\..\Application\ServerPlugins\TShockAPI.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TShock" Version="5.0.0-beta.0.1" />
   </ItemGroup>
 
 </Project>
